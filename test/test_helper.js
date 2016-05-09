@@ -22,7 +22,7 @@ describe('immutability', () => {
   describe('immutable tree', () => {
     function movieStateTree(currentState, movie) {
       let newList = currentState.get('movies').push(movie);
-      return currentState.set('movies', newList);
+      return currentState.update('movies', movies => movies.push(movie));
     }
     it('create new immutable map and new state', () => {
       let state = Map({movies: List.of('movie1', 'movie2')});
@@ -32,7 +32,3 @@ describe('immutability', () => {
     })
   });
 });
-
-// let map = Map({movies: List.of('movie1', 'movie2')});
-// let val = map.get('movies');
-// console.log(val, Map.isMap(map))
