@@ -2,7 +2,7 @@ import chai from 'chai'
 import chaiImmutable from 'chai-immutable'
 import {expect} from 'chai'
 import {List, Map} from 'immutable'
-
+import {setEntries} from './../src/core'
 chai.use(chaiImmutable);
 
 
@@ -21,7 +21,8 @@ describe('immutability', () => {
 
   describe('immutable tree', () => {
     function movieStateTree(currentState, movie) {
-      let newList = currentState.get('movies').push(movie);
+      // let newList = currentState.get('movies').push(movie);
+      // currentState.set('movies', newList)
       return currentState.update('movies', movies => movies.push(movie));
     }
     it('create new immutable map and new state', () => {
@@ -30,5 +31,18 @@ describe('immutability', () => {
       expect(state).to.equal(Map({movies: List.of('movie1', 'movie2')}));
       expect(nextState).to.equal(Map({movies: List.of('movie1', 'movie2', 'movie3')}))
     })
+  });
+});
+
+describe('application logic', () => {
+  describe('setEntries', () => {
+    it('adds entries to the state', () => {
+      const state = Map();
+      const entries = List.of('Trainspotting', '28 Days Later');
+      const nextState = setEntries(state, entries);
+      expect(nextState).to.equal(Map({
+        entries: List.of('Trainspotting', '28 Days Later')
+      }));
+    });
   });
 });
