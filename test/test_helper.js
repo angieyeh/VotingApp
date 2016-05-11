@@ -52,10 +52,12 @@ describe('application logic', () => {
         entries: List.of('Trainspotting', '28 Days Later', 'Sunshine')
       });
       const nextState = next(state);
-      expect(nextState).to.equal(Map({
-        vote:  Map({ pair : List.of('Trainspotting', '28 Days Later'}),
-        entries: List.of('Sunshine'))}));
-
+      expect(nextState).to.equal(
+        Map({
+          vote:  Map({ pair : List.of('Trainspotting', '28 Days Later')}),
+          entries: List.of('Sunshine')
+        })
+      );
     });
   });
 });
