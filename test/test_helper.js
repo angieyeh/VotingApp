@@ -2,7 +2,7 @@ import chai from 'chai'
 import chaiImmutable from 'chai-immutable'
 import {expect} from 'chai'
 import {List, Map} from 'immutable'
-import {setEntries} from './../src/core'
+import {setEntries, next} from './../src/core'
 chai.use(chaiImmutable);
 
 
@@ -45,4 +45,22 @@ describe('application logic', () => {
       }));
     });
   });
+
+  describe('takes the next two entries under vote', () => {
+    it('vote Map on state', () => {
+      const state = Map({
+        entries: List.of('Trainspotting', '28 Days Later', 'Sunshine')
+      });
+      const nextState = next(state);
+      expect(nextState).to.equal(Map({
+        vote:  Map({ pair : List.of('Trainspotting', '28 Days Later'}),
+        entries: List.of('Sunshine'))}));
+
+    });
+  });
 });
+
+
+const entries = List.of('Trainspotting', '28 Days Later');
+console.log(entries.push('movie'))
+console.log(entries)

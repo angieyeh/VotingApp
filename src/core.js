@@ -4,4 +4,6 @@ function setEntries(currentState, list) {
   return currentState.set('entries', list);
 }
 
+
+
 export {setEntries};
