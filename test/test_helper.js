@@ -60,6 +60,24 @@ describe('application logic', () => {
       );
     });
   });
+
+  describe('tally votes on pair being voted on', () => {
+    it('add tally to state tree', () => {
+      const state =   Map({
+          vote:  Map({ pair : List.of('Trainspotting', '28 Days Later')}),
+          entries: List.of('Sunshine')
+        })
+      const nextState = tally(state, 'Trainspotting');
+      expect(nextState).to.equal(Map({
+          vote:  Map({ pair : List.of('Trainspotting', '28 Days Later'),
+          tally: Map({'Trainspotting' : 1})
+        }),
+          entries: List.of('Sunshine')
+        }))
+
+    });
+  });
+
 });
 
 
