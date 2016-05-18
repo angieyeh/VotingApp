@@ -73,9 +73,25 @@ describe('application logic', () => {
           tally: Map({'Trainspotting' : 1})
         }),
           entries: List.of('Sunshine')
-        }))
-
+        }));
     });
+
+    it('increment tally if tally exists', () => {
+      const state = Map({
+          vote:  Map({ pair : List.of('Trainspotting', '28 Days Later'),
+                      tally: Map({'Trainspotting' : 1, '28 Days Later': 1})
+                    }),
+          entries: List.of('Sunshine')
+        });
+      const nextState = incrementTally(state, 'Trainspotting');
+      expect(nextState).to.equal(Map({
+          vote:  Map({ pair : List.of('Trainspotting', '28 Days Later'),
+                       tally: Map({'Trainspotting' : 2, '28 Days Later': 1})
+        }),
+          entries: List.of('Sunshine')
+        });)
+    });
+
   });
 
 });
