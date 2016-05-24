@@ -10,4 +10,12 @@ function next(state) {
   // return Map({ vote : Map({ pair : state.get('entries').slice(0, 2)}), entries : state.get('entries').slice(2)});
 }
 
-export {setEntries, next};
+function vote(state, entry) {
+  return state.updateIn(
+    ['vote', 'tally', entry],
+    0,
+    tally => tally + 1
+  );
+}
+
+export {setEntries, next, vote};

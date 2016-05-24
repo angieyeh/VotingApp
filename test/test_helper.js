@@ -2,7 +2,7 @@ import chai from 'chai'
 import chaiImmutable from 'chai-immutable'
 import {expect} from 'chai'
 import {List, Map} from 'immutable'
-import {setEntries, next} from './../src/core'
+import {setEntries, next, vote} from './../src/core'
 chai.use(chaiImmutable);
 
 
@@ -67,10 +67,10 @@ describe('application logic', () => {
           vote:  Map({ pair : List.of('Trainspotting', '28 Days Later')}),
           entries: List.of('Sunshine')
         })
-      const nextState = tally(state, 'Trainspotting');
+      const nextState = vote(state, 'Trainspotting');
       expect(nextState).to.equal(Map({
           vote:  Map({ pair : List.of('Trainspotting', '28 Days Later'),
-          tally: Map({'Trainspotting' : 1})
+                      tally: Map({'Trainspotting' : 1})
         }),
           entries: List.of('Sunshine')
         }));
@@ -83,13 +83,13 @@ describe('application logic', () => {
                     }),
           entries: List.of('Sunshine')
         });
-      const nextState = incrementTally(state, 'Trainspotting');
+      const nextState = vote(state, 'Trainspotting');
       expect(nextState).to.equal(Map({
           vote:  Map({ pair : List.of('Trainspotting', '28 Days Later'),
                        tally: Map({'Trainspotting' : 2, '28 Days Later': 1})
         }),
           entries: List.of('Sunshine')
-        });)
+        }))
     });
 
   });
@@ -97,6 +97,6 @@ describe('application logic', () => {
 });
 
 
-const entries = List.of('Trainspotting', '28 Days Later');
-console.log(entries.push('movie'))
-console.log(entries)
+// const entries = List.of('Trainspotting', '28 Days Later');
+// console.log(entries.push('movie'))
+// console.log(entries)
