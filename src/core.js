@@ -9,6 +9,7 @@ function next(state) {
   const entries = state.get('entries');
   // console.log('tally', state.get('vote'))
   if (state.get('vote')) {
+    console.log(state.get('vote').get('tally').keyOf(state.get('vote').get('tally').max()))
     winner = state.get('vote').get('tally').keyOf(state.get('vote').get('tally').max());
     return state.merge({ vote : Map({ pair : entries.take(2) }), entries : entries.skip(2).push(winner)});
   }

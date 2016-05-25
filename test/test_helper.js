@@ -76,7 +76,19 @@ describe('application logic', () => {
     });
 
     it('if movie ties, puts both movies back on entries list', () => {
-      
+      const state = Map({
+          vote:  Map({ pair : List.of('Trainspotting', '28 Days Later'),
+                       tally: Map({'Trainspotting' : 2, '28 Days Later': 2})
+                     }),
+          entries: List.of('Sunshine', 'Millions', '127 Hours')
+        });
+      const nextState = next(state);
+      Map({
+            vote:  Map({ pair : List.of('Sunshine', 'Millions')
+                       }),
+            entries: List.of('127 Hours', 'Trainspotting', '28 Days Later')
+          })
+          
     })
 
   });
