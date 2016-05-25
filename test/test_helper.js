@@ -34,6 +34,8 @@ describe('immutability', () => {
   });
 });
 
+
+
 describe('application logic', () => {
   describe('setEntries', () => {
     it('adds entries to the state', () => {
@@ -83,12 +85,11 @@ describe('application logic', () => {
           entries: List.of('Sunshine', 'Millions', '127 Hours')
         });
       const nextState = next(state);
-      Map({
+      expect(nextState).to.equal(Map({
             vote:  Map({ pair : List.of('Sunshine', 'Millions')
                        }),
             entries: List.of('127 Hours', 'Trainspotting', '28 Days Later')
-          })
-          
+          }));
     })
 
   });
@@ -123,7 +124,6 @@ describe('application logic', () => {
           entries: List.of('Sunshine')
         }))
     });
-
   });
 
 });
