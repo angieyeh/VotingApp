@@ -59,11 +59,31 @@ describe('application logic', () => {
         })
       );
     });
+
+    it('put winner of current vote to entries to be voted on in future round', () => {
+      const state = Map({
+          vote:  Map({ pair : List.of('Trainspotting', '28 Days Later'),
+                       tally: Map({'Trainspotting' : 2, '28 Days Later': 1})
+                     }),
+          entries: List.of('Sunshine', 'Millions', '127 Hours')
+        });
+      const nextState = next(state);
+      expect(nextState).to.equal(Map({
+            vote:  Map({ pair : List.of('Sunshine', 'Millions')
+                       }),
+            entries: List.of('127 Hours', 'Trainspotting')
+          }));
+    });
+
+    it('if movie ties, puts both movies back on entries list', () => {
+      
+    })
+
   });
 
   describe('tally votes on pair being voted on', () => {
     it('add tally to state tree', () => {
-      const state =   Map({
+      const state =  Map({
           vote:  Map({ pair : List.of('Trainspotting', '28 Days Later')}),
           entries: List.of('Sunshine')
         })
