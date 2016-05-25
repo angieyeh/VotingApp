@@ -22,7 +22,11 @@ function next(state) {
 
   const entries = state.get('entries').concat(getWinner(state.get('vote')));
 
-  // console.log('ENTRY', entries)
+  console.log('ENTRY', entries.size)
+  if (entries.size === 1) {
+    const winner = entries.get(0);
+    return state.delete('vote').delete('entries').set('winner', winner);
+  }
   return state.merge({ vote : Map({ pair : entries.take(2) }),
                         entries : entries.skip(2)
                       });
