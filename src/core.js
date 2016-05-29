@@ -1,4 +1,4 @@
-import {List, Map} from 'immutable'
+enimport {List, Map} from 'immutable'
 
 function setEntries(currentState, list) {
   return currentState.set('entries', list);
@@ -22,7 +22,6 @@ function next(state) {
 
   const entries = state.get('entries').concat(getWinner(state.get('vote')));
 
-  console.log('ENTRY', entries.size)
   if (entries.size === 1) {
     const winner = entries.get(0);
     return state.delete('vote').delete('entries').set('winner', winner);

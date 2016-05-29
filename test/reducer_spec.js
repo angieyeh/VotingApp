@@ -17,7 +17,7 @@ describe('reducer', () => {
     const initialState = fromJS({
       entries: ['Trainspotting', '28 Days Later']
     });
-    let nextAction = {type: 'VOTE'};
+    let nextAction = {type: 'NEXT'};
     const nextState = reducer(initialState, nextAction)
     expect(nextState).to.equal(fromJs({
       vote: {
